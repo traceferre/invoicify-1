@@ -1,7 +1,6 @@
 package com.theironyard.invoicify.models;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.within;
 
 import java.sql.Date;
 
@@ -24,6 +23,9 @@ public class FlatFeeBillingRecordTests {
 	public void test_getters_and_setters() {
 		Configuration configuration = new ConfigurationBuilder()
 			.ignoreProperty("createdOn")
+			.ignoreProperty("createdBy")
+			.ignoreProperty("client")
+			.ignoreProperty("lineItem")
 			.build();
 		new BeanTester().testBean(FlatFeeBillingRecord.class, configuration);
 	}
@@ -43,6 +45,57 @@ public class FlatFeeBillingRecordTests {
 		Date actual = record.getCreatedOn();
 		
 		assertThat(actual).isEqualTo(date);
+	}
+	
+	@Test
+	public void test_createdBy_is_null_by_default() {
+		User actual = record.getCreatedBy();
+		
+		assertThat(actual).isNull();
+	}
+	
+	@Test
+	public void test_createdBy_gets_and_sets() {
+		User user = new User();
+		record.setCreatedBy(user);
+		
+		User actual = record.getCreatedBy();
+		
+		assertThat(actual).isEqualTo(user);
+	}
+	
+	@Test
+	public void test_lineItem_is_null_by_default() {
+		InvoiceLineItem actual = record.getLineItem();
+		
+		assertThat(actual).isNull();
+	}
+	
+	@Test
+	public void test_lineItem_gets_and_sets() {
+		InvoiceLineItem lineItem = new InvoiceLineItem();
+		record.setLineItem(lineItem);
+		
+		InvoiceLineItem actual = record.getLineItem();
+		
+		assertThat(actual).isEqualTo(lineItem);
+	}
+	
+	@Test
+	public void test_client_is_null_by_default() {
+		Company actual = record.getClient();
+		
+		assertThat(actual).isNull();
+	}
+	
+	@Test
+	public void test_client_gets_and_sets() {
+		Company client = new Company();
+		record.setClient(client);
+		
+		Company actual = record.getClient();
+		
+		assertThat(actual).isEqualTo(client);
 	}
 	
 	@Test

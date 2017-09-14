@@ -1,12 +1,14 @@
 package com.theironyard.invoicify.models;
 
 import java.sql.Date;
+import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public abstract class BillingRecord {
@@ -21,6 +23,22 @@ public abstract class BillingRecord {
 	private Date createdOn;
 	
 	private String description;
+	
+	@OneToOne(mappedBy="billingRecord")
+	private InvoiceLineItem lineItem;
+	
+	@ManyToOne
+	private Company client;
+	
+	public BillingRecord() {}
+	
+	public BillingRecord(String description, User createdBy, Company client) {
+		long now = Calendar.getInstance().getTimeInMillis();
+		createdOn = new Date(now);
+		this.createdBy = createdBy;
+		this.description = description;
+		this.client = client;
+	}
 	
 	public abstract double getTotal();
 
@@ -54,6 +72,22 @@ public abstract class BillingRecord {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public InvoiceLineItem getLineItem() {
+		return lineItem;
+	}
+
+	public void setLineItem(InvoiceLineItem lineItem) {
+		this.lineItem = lineItem;
+	}
+
+	public Company getClient() {
+		return client;
+	}
+
+	public void setClient(Company client) {
+		this.client = client;
 	}
 	
 }
