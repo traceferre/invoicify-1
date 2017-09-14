@@ -64,8 +64,7 @@ public class InvoiceController {
 //			}
 //		}
 //		mv.addObject("records", records);
-		
-		mv.addObject("records", billingRepo.findByClientId(clientId));
+		mv.addObject("records", billingRepo.findByClientIdAndLineItemIdIsNull(clientId));
 		mv.addObject("clientId", clientId);
 		return mv;
 	}
