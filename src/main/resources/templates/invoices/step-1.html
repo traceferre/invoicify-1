@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Invoices</title>
+</head>
+<body>
+
+<h1>New Invoice</h1>
+
+<br>
+<h3>Please select a client</h3>
+
+<form method="post" action="/invoices/new">
+	<select required name="clientId">
+		<option value="">choose company ...</option>
+		{{#companies}}
+			<option value="{{ id }}">{{ name }}</option>
+		{{/companies}}
+	</select>
+	<button>Submit</button>
+	<input type="hidden" name="{{ _csrf.parameterName }}" value="{{ _csrf.token }}">
+</form>
+
+</body>
+</html>

@@ -3,6 +3,7 @@ package com.theironyard.invoicify.models;
 import static org.assertj.core.api.Assertions.*;
 
 import java.sql.Date;
+import java.util.Calendar;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,10 +32,10 @@ public class RateBasedBillingRecordTests {
 	}
 	
 	@Test
-	public void test_createdOn_is_null_by_default() {
+	public void test_createdOn_is_not_null() {
 		Date actual = record.getCreatedOn();
 		
-		assertThat(actual).isNull();
+		assertThat(actual).isNotNull();
 	}
 	
 	@Test

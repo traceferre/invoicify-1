@@ -10,5 +10,32 @@
 
 <h1>Invoices</h1>
 
+
+<a href="/invoices/new">Create new invoice</a>
+
+<br>
+<br>
+
+<table>
+  <thead>
+    <tr>
+      <th>Created on</th>
+      <th>Created by</th>
+      <th>Invoice Number</th>
+      <th>Company</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#invoices}}
+      <tr>
+        <td>{{ createdOn }}</td>
+        <td>{{ createdBy.username }}</td>
+        <td>{{ invoiceNumber }}</td>
+        <td>{{ company.name }}</td>
+       </tr>
+    {{/invoices}}
+  </tbody>  
+</table>
+
 </body>
 </html>
