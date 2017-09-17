@@ -38,6 +38,8 @@ public class User implements UserDetails {
 	@OneToMany(fetch=FetchType.EAGER, mappedBy="user", cascade=CascadeType.ALL)
 	private List<UserRole> roles;
 	
+	private String allRoles;
+	
 	public User() {}
 	
 	public User(String username, String password, String roleName) {
@@ -108,6 +110,18 @@ public class User implements UserDetails {
 
 	public void setRoles(List<UserRole> roles) {
 		this.roles = roles;
+	}
+
+	public String getAllRoles() {
+		setAllRoles();
+		return allRoles;
+	}
+
+	public void setAllRoles() {
+		this.allRoles = "";
+		for (UserRole role : roles) {
+			this.allRoles += " " + role.getName();
+		}
 	}
 
 }

@@ -8,9 +8,18 @@
 
 <h1>Invoicify</h1>
 
-<a href="/login">Login</a>
-<a href="/signup">Sign up!</a>
-<a href="/invoices">Invoices</a>
-<a href="/billing-records">Billing Records</a>
+{{> common/_navigation }}
+{{#isAdmin}}
+	<a href="/admin/companies">Companies</a>
+	<a href="/admin/roles">Associate Roles</a>
+	<a href="/invoices">Invoices</a>
+	<a href="/billing-records">Billing Records</a>
+{{/isAdmin}}
+{{#isClerk}}
+	<a href="/billing-records">Billing Records</a>
+{{/isClerk}}
+{{#isAccountant}}
+	<a href="/invoices">Billing Records</a>
+{{/isAccountant}}
 </body>
 </html>

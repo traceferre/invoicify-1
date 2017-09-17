@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Companies</title>
+</head>
+<body>
+
+{{> common/_navigation }}
+
+<h1>Roles</h1>
+
+<form method="post" action="/admin/roles">
+	<h3>Select user:</h3>
+	<select required name="userId">
+		<option value="">choose user ...</option>
+		{{#users}}
+			<option value="{{ id }}">{{ username }}</option>
+		{{/users}}
+	</select>
+	<h3>Associate role:</h3>
+	<i>For instance type CLERK, ACCOUNTANT, or ADMIN, or create new role)</i>
+	<input required type="text" name="role" placeholder="CLERK, ADMIN, etc...">
+	<br>
+	<br>
+	<button>Submit</button>
+	<input type="hidden" name="{{ _csrf.parameterName }}" value="{{ _csrf.token }}">
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>User Name</th>
+      <th>Roles</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#users}}
+      <tr>
+        <td>{{ username }}</td>
+        <td>{{ allRoles }}</td>
+       </tr>
+    {{/users}}
+  </tbody>  
+</table>
+
+
+
+</body>
+</html>

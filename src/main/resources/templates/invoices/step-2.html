@@ -5,11 +5,15 @@
 <title>Invoices</title>
 </head>
 <body>
+{{> common/_navigation }}
 
 <h1>New Invoice</h1>
 
 <br>
 <h3>Choose desired Billing Records</h3>
+{{#error}}
+	<h3>{{ error }}</h3>
+{{/error}}
 
 <form method="post" action="/invoices/create">
 	<input required type="text" name="invoiceNumber" placeholder="invoice number">
